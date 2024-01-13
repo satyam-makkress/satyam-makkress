@@ -1,0 +1,31 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+name = "Credit_app_copy"
+client_id = "e5f39d7d34f2229a6e979ec0b9d89464"
+application_url = "https://makkpressapps.com/credit_app_copy/install.php"
+embedded = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+use_legacy_install_flow = true
+
+[auth]
+redirect_urls = [
+  "https://makkpressapps.com/credit_app_copy/home.php"
+]
+
+[webhooks]
+api_version = "2023-10"
+
+  [webhooks.privacy_compliance]
+  customer_deletion_url = "https://makkpressapps.com/credit_app_copy/gdpr/cust_data_erasure.php"
+  customer_data_request_url = "https://makkpressapps.com/credit_app_copy/gdpr/cust_data_request.php"
+  shop_deletion_url = "https://makkpressapps.com/credit_app_copy/gdpr/shop_data_erasure.php"
+
+[pos]
+embedded = false
+
+[build]
+automatically_update_urls_on_dev = false
+dev_store_url = "test-app-for-india.myshopify.com"

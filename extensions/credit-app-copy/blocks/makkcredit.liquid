@@ -1,0 +1,168 @@
+{% schema %}
+{
+"name": "Credit App",
+"target": "body"
+}
+{% endschema %}
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Credit App</title>
+	</head>
+	<body>
+		<input hidden type="text" value="{{customer.id}}" id="stcid" >
+		<link rel="stylesheet" type="text/css" href="{{'mc.css' | asset_url }}">
+		<div class="myDIV testmain"  id="mc-section" data-customer="{{ customer.id }}" data-store="{{ shop.permanent_domain }}">
+			<!--button //123-->
+			<div id="chat-circle" class="btn btn-raised iconHiding" >
+				<div id="chat-overlay"></div>
+				<!--<i class="material-icons">android</i>-->
+				<h3 id="icon_heading"></h3>
+				<img class="_robot"  src="{{'makk-press-logo.png' | asset_url}}" loading="lazy" width="50" height="50" style="cursor: pointer;">
+			</div>
+			<!--chat-bot-->
+		
+			  <div class="Side_Amount_container" currency="{{shop.currency }}" id="showChatBtn" shop="{{shop.domain }}" user="{{customer.id}}" onclick="show_history_php(this)">
+				<div class="Amount_text_info">
+					<p>You Have</p>
+				</div>
+				<div id="totalamount_show" >
+				<input hidden type="text" id="mc_condition">
+				<h5 class="amounts_side"> <span data-mcbalance="0"  id="mcbalanceid">0</span>&nbsp;<span id="mc-currency">{{shop.currency}}</span><img class="coin_img"  src="{{'coin.png' | asset_url}}" loading="lazy" width="20" height="20">
+			</h5>
+			</div>
+			  </div>
+		 <div class="chat-wrapper">
+			<div class="chat-container">
+			<div class="chat-box">			
+				<div class="chat-box-body">
+					<!--welcome message-->
+					<div class="chat-box-welcome__header">
+						<div class="chat-box__header-text">
+							<p3 class="chat-box-welcome__company-name mpsc-customer-name" >{{ customer.name }}</p3>
+							<span class="chat-box-toggle" onclick="closechat()">
+							<i class="material-icons">cancel</i>
+							</span>
+						</div>
+						<div class="div-wrapper wrappopup">
+							<div class="mpsc-customer-section">
+								<div class="total_credit_amount">
+									<h5  id="msg_cart"></h5>
+									<div class="current_balance">
+										<h5 class="center-text total_h5" id="heading1">YOU HAVE</h5>
+										<h5 class="current_balance center-text coupon_h5" id="heading2">your current coupon amount is</h5>
+										<div id="totalamount_show" >
+											<input hidden type="text" id="mc_condition">
+											<h5> <span data-mcbalance="0"  id="mcbalanceid">0</span>&nbsp;<span id="mc-currency">{{shop.currency}}</span></h5>
+										</div>
+									</div>
+									<div id="coupon_show" style="text-align: center;">
+										<h5> <span data-mccoupon="0" id="mccouponid"></span>&nbsp;<span id="coupon-currency">{{shop.currency}}</span></h5>
+									</div>
+								</div>
+								<div class="total_credit_amount">
+									<div>
+										<h5 class="center-text total_h5" id="heading3">How much would you like to use ?</h5>
+									</div>
+									<div>
+										<h5 class="center-text coupon_h5" id="heading4">coupon code <span data-showcoupon="0" id="showcouponid"></span></h5>
+										<div class="remaning_amount"><span class="remaning_amount_in"></span></div>
+								
+									</div>
+									<div class="checkbox">
+										<input type="checkbox" id="total_amountbox" onclick="useAllAmount();">
+										<h5 class="Checkbox_heading" id="heading5">I did like to use all my credit amount</h5>
+									</div>
+									<div id="show_message"></div>
+									<div><input type="number" id="total_credit_amountid"  placeholder="Enter Required Credit"></div>
+									<div class="btn-credit">
+										<input type="button" class="chat-box-toggle1" value="Continue Shoping" onclick="continue_btn()" id="btn-continue" >
+										<input type="button" value="Checkout"  class="coupon_h5" id="btn_checkoute1" onclick="button_change_text()">
+										<input type="button" value="Checkout"  class="total_h5"  onclick="cart_change_amount()"  id="btn_checkoute" >
+									</div>
+									<div>
+										<input type="button" value="Coupon Amount Change"   class="coupon_h5" id="btn_checkoute2" >
+										<div id="change_value_msg"></div>
+
+									</div>
+									<history class="history_transcation">
+                                    <div  class="show_history_php" shop="{{shop.domain }}" user="{{customer.id}}" >Show History</div>
+                                    <div class="all-tranction"></div>  
+                                </history>
+								</div>
+							</div>
+							<div class="total_credit_amount">
+								<input type="text" hidden id="planid">
+								<div class="logo_wrap">
+									<h4 id="powered"> Power by</h4>
+									<div class="logo_cover">
+										<img class="image__logo"  src="{{'makk-press-logo.png' | asset_url}}" loading="lazy" width="50" height="50" >
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+			</div>
+			</div>
+		</div>
+		 
+		
+
+		</div>
+		</div>
+		{% comment %} <div id="show_history"></div> {% endcomment %}
+
+		<script src="{{ 'jquery.js' | asset_url }}" defer></script>
+		<script src="{{ 'mc.js' | asset_url }}" defer></script>
+
+		<script>
+		//-----------admin show-----------
+      	setTimeout(function() {
+
+          $("#mc-section").css({"display":"block"}) ;
+
+	        var is_admin = window.parent.location.href.indexOf("admin");
+	        var customer = document.getElementById("stcid").value ;
+	        // console.log("is_admin : "+is_admin) ;
+	        // console.log("customer : "+customer);
+
+	        var section = document.getElementById("mc-section");
+
+	        if ( (is_admin > 0) && (customer == undefined || customer == null || customer == "") ) {
+				$(".mpsc-customer-name").text("Admin") ;
+				$(".mpsc-customer-section").html("<h2 class='mpsc-admin-head'>Currently viewing as admin!</h2><p class='mpsc-admin-text'>Please login as customer to see full functionlity.</p>") ;
+	        }
+	        else if ( (customer == undefined || customer == null || customer == "")  && (is_admin <= 0) ) {
+
+				$(".mpsc-customer-name").text("Customer") ;
+				$(".mpsc-customer-section").html("<p class='mpsc-customer-text' id='c_login'>Please login to your customer account to use your credit balance.</p>") ;
+	        }
+	        //  ===============================================
+
+	        // if ( (customer != undefined || customer != null || customer != "")  || (is_admin > 0) ){
+            // $("#mc-section").css({"display":"block"}) ;
+            // console.log("ok");
+
+            // if ( is_admin > 0 ) {
+            //   $(".mpsc-customer-name").text("Admin") ;
+            //   $(".mpsc-customer-section").html("<h2 class='mpsc-admin-head'>Currently viewing as admin!</h2><p class='mpsc-admin-text'>Please login as customer to see full functionlity.</p>") ;
+            // }
+	        // }
+	        // else{
+			// 	console.log("not working");
+			// 	$("#mc-section").css({"display":"none"}) ;
+	        // }
+
+      	},1000) ;
+
+
+
+
+
+		</script>
+
+	</body>
+</html>

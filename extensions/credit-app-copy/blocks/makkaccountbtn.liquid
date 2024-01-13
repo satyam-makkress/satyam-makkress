@@ -1,0 +1,137 @@
+{% schema %}
+    {
+      "name": "Credit Account Button",
+      "target": "section"
+    }
+  {% endschema %}
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="{{'mc.css' | asset_url }}">
+  
+   <link
+    rel="stylesheet"
+    type="text/css"
+    href="{{'datatable.css' | asset_url }}"> 
+  <html lang="en">
+    <head>
+      <script src="{{ 'jquery.js' | asset_url }}" defer></script>
+      <script src="{{ 'datatable.js' | asset_url }}" defer></script>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>MP — Store Credit Section</title>
+    </head>
+    <style>
+      .mpopup {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+      .modal-content {
+        position: relative;
+        background-color: #fff;
+        margin: auto;
+        padding: 0;
+        width: 450px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s;
+        border-radius: 0.3rem;
+      }
+      .modal-header {
+        padding: 2px 12px;
+        background-color: #ffffff;
+        color: #333;
+        border-bottom: 1px solid #e9ecef;
+        border-top-left-radius: 0.3rem;
+        border-top-right-radius: 0.3rem;
+      }
+      .modal-header h2 {
+        font-size: 1.25rem;
+        margin-top: 14px;
+        margin-bottom: 14px;
+      }
+      .modal-body {
+        padding: 2px 12px;
+      }
+      .modal-footer {
+        padding: 1rem;
+        background-color: #ffffff;
+        color: #333;
+        border-top: 1px solid #e9ecef;
+        border-bottom-left-radius: 0.3rem;
+        border-bottom-right-radius: 0.3rem;
+        text-align: right;
+      }
+  
+      .close {
+        color: #888;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .close:hover,
+      .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }
+  
+      /* add animation effects */
+      @-webkit-keyframes animatetop {
+        from {
+          top: -300px;
+          opacity: 0
+        }
+        to {
+          top: 0;
+          opacity: 1
+        }
+      }
+  
+      @keyframes animatetop {
+        from {
+          top: -300px;
+          opacity: 0
+        }
+        to {
+          top: 0;
+          opacity: 1
+        }
+      }
+    </style>
+    <body>
+    
+		 
+		
+            <p>you have $<span id="accountRemainingBal"></span> USD store credit</p>
+            <button class="btn btn-dark text-white checkOutStoreCredit" id="checkOutStoreCredit" customer="{{customer.id}}" data-store="{{ shop.permanent_domain }}" onclick="show_history_php(this);">Checkout using store credit</button>
+         <script>
+        //  document.addEventListener("click", myFunction);
+
+        //   function myFunction() {
+        //       var chatBox = document.querySelector('.chat-box'); // Assuming .chat-box is the element you want to show
+        //       var btn = document.getElementById("checkOutStoreCredit");
+              
+        //       // Check if the element exists and toggle its visibility
+        //       if (chatBox) {
+        //           if (chatBox.style.display == "none" || chatBox.style.display == "") {
+        //               chatBox.style.display = "block"; // Show the element
+        //           } else {
+        //               chatBox.style.display = "none"; // Hide the element
+        //           }
+        //       }
+        //   }
+         </script>   
+    </body>
+  </html>
